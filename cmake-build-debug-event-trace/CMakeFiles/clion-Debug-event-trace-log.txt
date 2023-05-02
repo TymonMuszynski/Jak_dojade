@@ -1,0 +1,10 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja null --profiling-format=google-trace --profiling-output=CMakeFiles/clion-event-trace.json -G Ninja -S /Users/tymonmuszynski/CLionProjects/JakDojade_0 -B /Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug-event-trace
+CMake Warning:
+  Ignoring extra path from command line:
+
+   "/Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug-event-trace/null"
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug-event-trace

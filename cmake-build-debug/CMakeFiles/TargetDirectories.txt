@@ -1,0 +1,3 @@
+/Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug/CMakeFiles/JakDojade_0.dir
+/Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/tymonmuszynski/CLionProjects/JakDojade_0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
