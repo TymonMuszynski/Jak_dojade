@@ -5,66 +5,92 @@
 #include "Dijkstra.h"
 
 Dijkstra::Dijkstra(HashTable *hashTableClass, int numberOfCities, String *startCity, String *endCity){
-    this->hashTableClass = hashTableClass;
-    this->numberOfCities = numberOfCities;
-    rootCityNode **hashTable = hashTableClass->getHashTable();
-    headPQ = new PQnode;
-//    int hashKey = startCity->getKeyOfCity() % numberOfCities;
+hashTable = hashTableClass->getHashTable();
+this->numberOfCities = numberOfCities;
 
-    for(int i=0; i<numberOfCities; i++){
-        rootCityNode *cur =  hashTable[i];
-        if(cur->cityNameRoot != nullptr) {
+    for(int i=0; i<numberOfCities; i++) {
+        rootCityNode *cur = hashTable[i];
+        if (cur->cityNameRoot != nullptr) {
             while (cur != nullptr) {
-//                neighbourCityNode *curNeighbour = cur->neighbourCity;
-//                if( curNeighbour->cityNameNeighbour != nullptr) {
-                if (headPQ->startCity == nullptr) {
-                    headPQ->startCity = cur;
-                    headPQ->previousCity = nullptr;
-                    headPQ->next = nullptr;
-                } else {
-                    PQnode *curPQ = new PQnode;
-                    curPQ->startCity = cur;
-                    curPQ->previousCity = nullptr;
-                    curPQ->next = headPQ;
-                    headPQ = curPQ;
+                cur->visited = false;
+                cur->previousCity = nullptr;
+                if(*cur->cityNameRoot == *startCity){
+                    cur->shortDistance = 0;
                 }
-                if (*headPQ->startCity->cityNameRoot == *startCity) {
-                    headPQ->time = 0;
-                } else {
-                    headPQ->time = 999999999999999999;
+                else{
+                    cur->shortDistance = 99999999999999;
                 }
-//                }
                 cur = cur->next;
             }
         }
     }
+    //hashTableClass->showHashTable();
 }
 
 void Dijkstra::showPQ(){
-    PQnode *cur = headPQ;
-    while(cur != nullptr){
-        cout << cur->startCity->cityNameRoot->c_str() << " " << cur->time << endl;
-        cur = cur->next;
-    }
+
 }
 
-void dijkstraAlgorith() {
+void Dijkstra::dijkstraAlgorithm() {
+    for(int i=0; i<numberOfCities; i++) {
+        getMinCity();
+        cout<<minCity->cityNameRoot->c_str()<<endl;
+
+        neighbourCityNode *cur = minCity->neighbourCity;
+        if (cur->cityNameNeighbour != nullptr) {
+            while (cur != nullptr) {
+                findRootCity(cur->cityNameNeighbour);
+                if (cityToCheck->shortDistance > minCity->shortDistance + cur->time) {
+                    cityToCheck->shortDistance = minCity->shortDistance + cur->time;
+                    cityToCheck->previousCity = minCity;
+                }
+                cur = cur->next;
+            }
+        }
+    }
 
 }
 
 void Dijkstra::getMinCity(){
-    PQnode *cur = headPQ;
-    PQnode *min = headPQ;
-    while(cur != nullptr){
-        if(cur->time < min->time && !cur->visited){
-            min = cur;
-        }
-        cur = cur->next;
+    minCity = nullptr;
+    for(int i=0; i<numberOfCities; i++) {
+            rootCityNode *cur = hashTable[i];
+            if(cur->cityNameRoot != nullptr) {
+                while (cur != nullptr) {
+                    if(minCity == nullptr){
+                        minCity = cur;
+                        cur->visited = true;
+                    }
+                    else {
+                        if (cur->visited == false) {
+                            if (cur->shortDistance < minCity->shortDistance) {
+                                minCity = cur;
+                                cur->visited = true;
+                            }
+                        }
+                    }
+                    cur = cur->next;
+                }
+            }
     }
-    minCity = min;
 }
 
-rootCityNode *Dijkstra::findRootCity(int key){
-    int hash = key % numberOfCities;
-
+void Dijkstra::findRootCity(String *cityName) {
+int hashkey = cityName->getKeyOfCity() % numberOfCities;
+    rootCityNode *cur = hashTable[hashkey];
+    if (cur->cityNameRoot != nullptr) {
+        while (cur != nullptr) {
+            if(*cur->cityNameRoot == *cityName){
+                cityToCheck = cur;
+            }
+            cur = cur->next;
+        }
+    }
 }
+
+
+//            if (hashTable[i]->visited == false) {
+//                if (hashTable[i]->shortDistance < minCity->shortDistance) {
+//                    minCity = hashTable[i];
+//                    hashTable[i]->visited = true;
+//                }

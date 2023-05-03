@@ -6,25 +6,18 @@
 #include "HashTable.h"
 #include "String.h"
 
-struct PQnode{
-    unsigned long long int time;
-    bool visited;
-    rootCityNode *startCity;
-    rootCityNode *previousCity;
-    PQnode *next;
-};
 
 class Dijkstra {
 private:
     int numberOfCities;
-    HashTable *hashTableClass;
-    PQnode *headPQ;
-    PQnode *minCity;
+    rootCityNode **hashTable;
+    rootCityNode *minCity;
+    rootCityNode *cityToCheck;
 public:
     Dijkstra(HashTable *hashTableClass, int numberOfCities, String *startCity, String *endCity);
-    void dijkstraAlgorith();
+    void dijkstraAlgorithm();
     void showPQ();
     void getMinCity();
-    rootCityNode *findRootCity(int key);
+    void findRootCity(String *cityName);
 };
 

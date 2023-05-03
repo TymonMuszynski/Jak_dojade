@@ -14,6 +14,9 @@ struct neighbourCityNode{
 };
 
 struct rootCityNode{
+    bool visited;
+    unsigned long long int shortDistance;
+    rootCityNode *previousCity;
     String *cityNameRoot;
     struct neighbourCityNode *neighbourCity;
     struct rootCityNode *next;

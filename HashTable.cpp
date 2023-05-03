@@ -23,6 +23,8 @@ void HashTable::addRootCity(String *cityNameRoot) {
     // checkig if rootCity is empty struct
     if(headRootCity->cityNameRoot == nullptr){
         headRootCity->cityNameRoot = cityNameRoot;
+        headRootCity->visited = false;
+        headRootCity->shortDistance = 0;
         //add neighbourCity to rootCity that is empty now
         headRootCity->neighbourCity = new neighbourCityNode;
         //set headOfCurrentRootCity to because we now that after this we will need it for adding neighbourCity
@@ -31,6 +33,8 @@ void HashTable::addRootCity(String *cityNameRoot) {
     else {
         rootCityNode *cur = new rootCityNode;
         cur->cityNameRoot = cityNameRoot;
+        headRootCity->visited = false;
+        headRootCity->shortDistance = 0;
         //add neighbourCity to rootCity that is empty now
         cur->neighbourCity = new neighbourCityNode;
         cur->next = headRootCity;
@@ -65,15 +69,21 @@ void HashTable::showHashTable(){
         cout<<"HashTable["<<i<<"]: "<<endl;
         if(cur->cityNameRoot != nullptr) {
             while (cur != nullptr) {
-                cout <<"    Root City:"<< cur->cityNameRoot->c_str() <<endl;
-                neighbourCityNode *curNeighbour = cur->neighbourCity;
-                if( curNeighbour->cityNameNeighbour != nullptr) {
-                    while (curNeighbour != nullptr) {
-                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
-                             << curNeighbour->time << endl;
-                        curNeighbour = curNeighbour->next;
-                    }
+                cout <<"    Root City:"<< cur->cityNameRoot->c_str()<<" Visited: "<<cur->visited<<" Distance: "<<cur->shortDistance;
+                if(cur->previousCity != nullptr){
+                    cout<<" Previous City: "<<cur->previousCity->cityNameRoot->c_str()<<endl;
                 }
+                else{
+                    cout<<" nullptr"<<endl;
+                }
+//                neighbourCityNode *curNeighbour = cur->neighbourCity;
+//                if( curNeighbour->cityNameNeighbour != nullptr) {
+//                    while (curNeighbour != nullptr) {
+//                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
+//                             << curNeighbour->time << endl;
+//                        curNeighbour = curNeighbour->next;
+//                    }
+//                }
                 cur = cur->next;
             }
         }

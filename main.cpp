@@ -36,8 +36,17 @@ int main()
     double durationSeconds = static_cast<double>(duration.count()) / 1000000.0;
     cout << "Time taken by function: " << durationSeconds << " seconds" << endl;
 
-    Dijkstra *dijkstraClass = new Dijkstra(bfsClass->getHashTable(), mapClass->getNumberOfCities(), new String("SOP"), new String("B"));
-    dijkstraClass->showPQ();
+    Dijkstra *dijkstraClass;
+    dijkstraClass = new Dijkstra(bfsClass->getHashTable(), mapClass->getNumberOfCities(), new String("SZCZECIN"), new String("B"));
+    dijkstraClass->dijkstraAlgorithm();
+    delete dijkstraClass;
+    bfsClass->getHashTable()->showHashTable();
+
+    dijkstraClass = new Dijkstra(bfsClass->getHashTable(), mapClass->getNumberOfCities(), new String("GDANSK"), new String("B"));
+    dijkstraClass->dijkstraAlgorithm();
+    delete dijkstraClass;
+    bfsClass->getHashTable()->showHashTable();
+
 //    cin>>nuberOfFlights;
 //    for(int i=0; i<nuberOfFlights; i++){
 //        flightTime = 0;
