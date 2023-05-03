@@ -34,6 +34,8 @@ void Dijkstra::showPQ(){
 void Dijkstra::dijkstraAlgorithm() {
     for(int i=0; i<numberOfCities; i++) {
         getMinCity();
+        minCity->visited = true;
+     //   cout<<"minCity: "<<*minCity->cityNameRoot<<endl;
 
         neighbourCityNode *cur = minCity->neighbourCity;
         if (cur->cityNameNeighbour != nullptr) {
@@ -58,18 +60,19 @@ void Dijkstra::getMinCity(){
             rootCityNode *cur = hashTable[i];
             if(cur->cityNameRoot != nullptr) {
                 while (cur != nullptr) {
-                    if(minCity == nullptr){
+                    if(minCity == nullptr && cur->visited == false){
                         minCity = cur;
-                        cur->visited = true;
+//                        cur->visited = true;
                     }
-                    else {
+                    if(minCity != nullptr) {
                         if (cur->visited == false) {
                             if (cur->shortDistance < minCity->shortDistance) {
                                 minCity = cur;
-                                cur->visited = true;
+//                                cur->visited = true;
                             }
                         }
                     }
+
                     cur = cur->next;
                 }
             }

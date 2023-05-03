@@ -75,7 +75,7 @@ int main()
        // cout<<cityDeparture->c_str()<<","<<cityArrival->c_str()<<","<<flightTime<<endl;
         bfsClass->getHashTable()->addFlight(cityDeparture, cityArrival, flightTime);
     }
-    //bfsClass->getHashTable()->showHashTable();
+  //  bfsClass->getHashTable()->showHashTable();
 
     cin>>numberOfTests;
     getchar();
@@ -118,7 +118,7 @@ int main()
         cout<<endl;
         delete dijkstraClass;
  //       cout<<"test:" << i<<endl;
-//        bfsClass->getHashTable()->showHashTable();
+   //     bfsClass->getHashTable()->showHashTable();
     }
 }
 

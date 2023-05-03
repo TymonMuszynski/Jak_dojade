@@ -91,14 +91,14 @@ void HashTable::showHashTable(){
                 else{
                     cout<<" nullptr"<<endl;
                 }
-//                neighbourCityNode *curNeighbour = cur->neighbourCity;
-//                if( curNeighbour->cityNameNeighbour != nullptr) {
-//                    while (curNeighbour != nullptr) {
-//                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
-//                             << curNeighbour->time << endl;
-//                        curNeighbour = curNeighbour->next;
-//                    }
-//                }
+                neighbourCityNode *curNeighbour = cur->neighbourCity;
+                if( curNeighbour->cityNameNeighbour != nullptr) {
+                    while (curNeighbour != nullptr) {
+                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
+                             << curNeighbour->time << endl;
+                        curNeighbour = curNeighbour->next;
+                    }
+                }
                 cur = cur->next;
             }
         }
