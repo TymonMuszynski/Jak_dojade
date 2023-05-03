@@ -116,7 +116,7 @@ void HashTable::addFlight(String *departureCity, String *arrivalCity, int time) 
                         if (*curNeighbour->cityNameNeighbour == *arrivalCity) {
                             if (curNeighbour->time > time) {
                                 curNeighbour->time = time;
-                                break;
+                                return;
                             }
                         }
                         if(curNeighbour->next == nullptr){
@@ -125,11 +125,17 @@ void HashTable::addFlight(String *departureCity, String *arrivalCity, int time) 
                             tmp->time = time;
                             tmp->next = nullptr;
                             curNeighbour->next = tmp;
-                            break;
+                            return;
                         }
                         curNeighbour = curNeighbour->next;
                     }
                 }
+                else {
+                    cur->neighbourCity->cityNameNeighbour = arrivalCity;
+                    cur->neighbourCity->time = time;
+                    return;
+                }
+
                 break;
             }
             cur = cur->next;
