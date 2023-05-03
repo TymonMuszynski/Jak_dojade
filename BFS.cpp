@@ -128,7 +128,7 @@ void BFS::getRootCity(int x, int y){
                     city->removeSpaces();
                    // cout<<"Miasto: "<<city->c_str()<<endl;
                     hashTable->addRootCity(city);
-                    continue;
+                    break;
                 }
                 if(checkEdgeColumn(left_x) || map[new_y][left_x] == '.' || map[new_y][left_x] == '#' || map[new_y][left_x] == '*'){
                    // cout << "Pierwsza litera: "<<map[new_y][new_x]<< endl;
@@ -146,7 +146,7 @@ void BFS::getRootCity(int x, int y){
                   //  cout<<"Miasto: "<<city->c_str()<<endl;
                     city->removeSpaces();
                     hashTable->addRootCity(city);
-                    continue;
+                    break;
                 }
             }
         }

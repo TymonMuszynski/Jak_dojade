@@ -22,6 +22,11 @@ struct rootCityNode{
     struct rootCityNode *next;
 };
 
+struct responseNode{
+    String *cityName;
+    struct responseNode *next;
+};
+
 class HashTable {
 protected:
     int numberOfCities;

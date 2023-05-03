@@ -21,6 +21,17 @@ void HashTable::addRootCity(String *cityNameRoot) {
     hashKey = key % numberOfCities;
     headRootCity = hashTable[hashKey];
     // checkig if rootCity is empty struct
+
+    rootCityNode *cur = hashTable[hashKey];
+    if(cur->cityNameRoot != nullptr) {
+        while (cur != nullptr) {
+            if(*cur->cityNameRoot == *cityNameRoot){
+                return;
+            }
+            cur = cur->next;
+        }
+    }
+
     if(headRootCity->cityNameRoot == nullptr){
         headRootCity->cityNameRoot = cityNameRoot;
         headRootCity->visited = false;
@@ -80,14 +91,14 @@ void HashTable::showHashTable(){
                 else{
                     cout<<" nullptr"<<endl;
                 }
-                neighbourCityNode *curNeighbour = cur->neighbourCity;
-                if( curNeighbour->cityNameNeighbour != nullptr) {
-                    while (curNeighbour != nullptr) {
-                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
-                             << curNeighbour->time << endl;
-                        curNeighbour = curNeighbour->next;
-                    }
-                }
+//                neighbourCityNode *curNeighbour = cur->neighbourCity;
+//                if( curNeighbour->cityNameNeighbour != nullptr) {
+//                    while (curNeighbour != nullptr) {
+//                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
+//                             << curNeighbour->time << endl;
+//                        curNeighbour = curNeighbour->next;
+//                    }
+//                }
                 cur = cur->next;
             }
         }
@@ -142,16 +153,40 @@ void HashTable::testNo0(String *startCity, String *endCity) {
 }
 
 void HashTable::testNo1(String *startCity, String *endCity) {
+    responseNode *head = new responseNode;
+    head->cityName = nullptr;
+    head->next = nullptr;
+
     testNo0(startCity, endCity);
     rootCityNode *tmp;
     tmp = cityThatEndsRout->previousCity;
     if(tmp != nullptr && tmp->cityNameRoot != nullptr) {
         while (!(*tmp->cityNameRoot == *startCity)) {
-            cout << " ";
-            cout << tmp->cityNameRoot->c_str();
-            tmp = tmp->previousCity;
+//            cout << " ";
+//            cout << tmp->cityNameRoot->c_str();
+
+            if(head->cityName == nullptr){
+                head->cityName = tmp->cityNameRoot;
+            }
+            else{
+                responseNode *tmpRe = new responseNode;
+                tmpRe->next = head;
+                tmpRe->cityName = tmp->cityNameRoot;
+                head = tmpRe;
+            }
+
+tmp = tmp->previousCity;
+//
         }
     }
+
+    responseNode *showTmp = head;
+    while(showTmp != nullptr && showTmp->cityName != nullptr){
+        cout<<" "<<showTmp->cityName->c_str();
+        showTmp = showTmp->next;
+    }
+
+
 
 //    if(*cityThatEndsRout->previousCity->cityNameRoot == *startCity){
 //        return;

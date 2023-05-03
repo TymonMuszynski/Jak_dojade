@@ -75,7 +75,7 @@ int main()
        // cout<<cityDeparture->c_str()<<","<<cityArrival->c_str()<<","<<flightTime<<endl;
         bfsClass->getHashTable()->addFlight(cityDeparture, cityArrival, flightTime);
     }
-   // bfsClass->getHashTable()->showHashTable();
+    //bfsClass->getHashTable()->showHashTable();
 
     cin>>numberOfTests;
     getchar();
@@ -106,7 +106,9 @@ int main()
         endCity->removeSpaces();
        // cout << startCity->c_str() << "," << endCity->c_str() << "," << typeOfTest << endl;
         dijkstraClass = new Dijkstra(bfsClass->getHashTable(), mapClass->getNumberOfCities(), startCity, endCity);
+//        bfsClass->getHashTable()->showHashTable();
         dijkstraClass->dijkstraAlgorithm();
+
         if(typeOfTest == 1){
             bfsClass->getHashTable()->testNo1(startCity, endCity);
         }
@@ -115,7 +117,8 @@ int main()
         }
         cout<<endl;
         delete dijkstraClass;
-       // bfsClass->getHashTable()->showHashTable();
+ //       cout<<"test:" << i<<endl;
+//        bfsClass->getHashTable()->showHashTable();
     }
 }
 
