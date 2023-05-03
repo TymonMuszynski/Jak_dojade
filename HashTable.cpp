@@ -27,6 +27,8 @@ void HashTable::addRootCity(String *cityNameRoot) {
         headRootCity->shortDistance = 0;
         //add neighbourCity to rootCity that is empty now
         headRootCity->neighbourCity = new neighbourCityNode;
+        headRootCity->neighbourCity->cityNameNeighbour = nullptr;
+        headRootCity->neighbourCity->next = nullptr;
         //set headOfCurrentRootCity to because we now that after this we will need it for adding neighbourCity
         headOfCurrentRootCity = headRootCity;
     }
@@ -37,6 +39,8 @@ void HashTable::addRootCity(String *cityNameRoot) {
         headRootCity->shortDistance = 0;
         //add neighbourCity to rootCity that is empty now
         cur->neighbourCity = new neighbourCityNode;
+        cur->neighbourCity->cityNameNeighbour = nullptr;
+        cur->neighbourCity->next = nullptr;
         cur->next = headRootCity;
         hashTable[hashKey] = cur;
         //set headOfCurrentRootCity to because we now that after this we will need it for adding neighbourCity
@@ -141,10 +145,12 @@ void HashTable::testNo1(String *startCity, String *endCity) {
     testNo0(startCity, endCity);
     rootCityNode *tmp;
     tmp = cityThatEndsRout->previousCity;
-    while(!(*tmp->cityNameRoot == *startCity)){
-        cout<<" ";
-        cout<<tmp->cityNameRoot->c_str();
-        tmp = tmp->previousCity;
+    if(tmp != nullptr && tmp->cityNameRoot != nullptr) {
+        while (!(*tmp->cityNameRoot == *startCity)) {
+            cout << " ";
+            cout << tmp->cityNameRoot->c_str();
+            tmp = tmp->previousCity;
+        }
     }
 
 //    if(*cityThatEndsRout->previousCity->cityNameRoot == *startCity){

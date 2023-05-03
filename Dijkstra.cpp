@@ -38,10 +38,12 @@ void Dijkstra::dijkstraAlgorithm() {
         neighbourCityNode *cur = minCity->neighbourCity;
         if (cur->cityNameNeighbour != nullptr) {
             while (cur != nullptr) {
+                if(cur->cityNameNeighbour != nullptr){
                 findRootCity(cur->cityNameNeighbour);
                 if (cityToCheck->shortDistance > minCity->shortDistance + cur->time) {
                     cityToCheck->shortDistance = minCity->shortDistance + cur->time;
                     cityToCheck->previousCity = minCity;
+                }
                 }
                 cur = cur->next;
             }

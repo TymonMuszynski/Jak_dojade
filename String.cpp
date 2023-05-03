@@ -88,11 +88,16 @@ void String::addChars(const char* str) {
 }
 
 int String::getKeyOfCity(){
-    int key = 0;
-    for(int i=0; i<m_length; i++){
-        key += m_data[i];
-    }
-    return key;
+//    if(m_data == nullptr) {
+//        std::cout << "Brak danych" << std::endl;
+//    }
+//    else {
+        int key = 0;
+        for (int i = 0; i < m_length; i++) {
+            key += m_data[i];
+        }
+        return key;
+//    }
 }
 
 bool operator==(const String& lhs, const String &rhs) {
