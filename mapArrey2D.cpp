@@ -5,6 +5,7 @@
 #include "mapArrey2D.h"
 
 mapArrey2D::mapArrey2D(int x, int y) {
+    numberOfCities = 0;
     char tmp;
     sizeX = x;
     sizeY = y;

@@ -29,6 +29,7 @@ protected:
     int hashKey;
     rootCityNode **hashTable;
     rootCityNode *headOfCurrentRootCity;
+    rootCityNode *cityThatEndsRout;
 public:
     HashTable(int numberOfCities);
     ~HashTable();
@@ -36,6 +37,9 @@ public:
     void addNeighbourCity(String *cityNameNeighbour, int time);
     void showHashTable();
     rootCityNode **getHashTable();
+    void addFlight(String *departureCity, String *arrivalCity, int time);
+    void testNo0(String *startCity, String *endCity);
+    void testNo1(String *startCity, String *endCity);
 };
 
 

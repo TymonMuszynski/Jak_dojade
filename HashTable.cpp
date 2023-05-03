@@ -76,19 +76,81 @@ void HashTable::showHashTable(){
                 else{
                     cout<<" nullptr"<<endl;
                 }
-//                neighbourCityNode *curNeighbour = cur->neighbourCity;
-//                if( curNeighbour->cityNameNeighbour != nullptr) {
-//                    while (curNeighbour != nullptr) {
-//                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
-//                             << curNeighbour->time << endl;
-//                        curNeighbour = curNeighbour->next;
-//                    }
-//                }
+                neighbourCityNode *curNeighbour = cur->neighbourCity;
+                if( curNeighbour->cityNameNeighbour != nullptr) {
+                    while (curNeighbour != nullptr) {
+                        cout << "        Neighbour City:" << curNeighbour->cityNameNeighbour->c_str() << " Time: "
+                             << curNeighbour->time << endl;
+                        curNeighbour = curNeighbour->next;
+                    }
+                }
                 cur = cur->next;
             }
         }
     }
 }
 
+void HashTable::addFlight(String *departureCity, String *arrivalCity, int time) {
+    rootCityNode *cur = hashTable[departureCity->getKeyOfCity() % numberOfCities];
+    if (cur->cityNameRoot != nullptr) {
+        while (cur != nullptr) {
+            if (*cur->cityNameRoot == *departureCity) {
+                neighbourCityNode *curNeighbour = cur->neighbourCity;
+                if (curNeighbour->cityNameNeighbour != nullptr) {
+                    while (curNeighbour != nullptr) {
+                        if (*curNeighbour->cityNameNeighbour == *arrivalCity) {
+                            if (curNeighbour->time > time) {
+                                curNeighbour->time = time;
+                                break;
+                            }
+                        }
+                        if(curNeighbour->next == nullptr){
+                            neighbourCityNode *tmp = new neighbourCityNode;
+                            tmp->cityNameNeighbour = arrivalCity;
+                            tmp->time = time;
+                            tmp->next = nullptr;
+                            curNeighbour->next = tmp;
+                            break;
+                        }
+                        curNeighbour = curNeighbour->next;
+                    }
+                }
+                break;
+            }
+            cur = cur->next;
+        }
+    }
+}
 
+void HashTable::testNo0(String *startCity, String *endCity) {
+    rootCityNode *cur = hashTable[endCity->getKeyOfCity() % numberOfCities];
+    if(cur->cityNameRoot != nullptr) {
+        while (cur != nullptr) {
+            if(*cur->cityNameRoot == *endCity){
+                cout<<cur->shortDistance;
+                cityThatEndsRout = cur;
+                break;
+            }
+            cur = cur->next;
+        }
+    }
 
+}
+
+void HashTable::testNo1(String *startCity, String *endCity) {
+    testNo0(startCity, endCity);
+    rootCityNode *tmp;
+    tmp = cityThatEndsRout->previousCity;
+    while(!(*tmp->cityNameRoot == *startCity)){
+        cout<<" ";
+        cout<<tmp->cityNameRoot->c_str();
+        tmp = tmp->previousCity;
+    }
+
+//    if(*cityThatEndsRout->previousCity->cityNameRoot == *startCity){
+//        return;
+//    }
+//    else{
+//        while()
+//    }
+}

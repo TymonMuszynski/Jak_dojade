@@ -34,7 +34,6 @@ void Dijkstra::showPQ(){
 void Dijkstra::dijkstraAlgorithm() {
     for(int i=0; i<numberOfCities; i++) {
         getMinCity();
-        cout<<minCity->cityNameRoot->c_str()<<endl;
 
         neighbourCityNode *cur = minCity->neighbourCity;
         if (cur->cityNameNeighbour != nullptr) {
